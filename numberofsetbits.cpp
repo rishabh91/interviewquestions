@@ -1,7 +1,5 @@
 //Write an efficient program to count number of 1s in binary representation of an integer.
-
-
-
+//Implementation of Brian Kernighan’s Algorithm:
 #include <iostream>
 using namespace std;
 int count_one (int n)
