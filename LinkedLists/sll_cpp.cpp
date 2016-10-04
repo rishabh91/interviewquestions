@@ -5,7 +5,41 @@ struct Node
 	int data;
 	Node* next;
 };
+Node* insertontop(Node* head,int val)
+{
+	Node *temp = head;
+	Node *top = new Node();
+	top->data = val; 
+	top->next = temp;
+	head = top;
+	return head;
+}
 
+Node* insertinbetween(Node* head,int position,int val)
+{
+	if(position>1)
+	{
+		int counter = 1;
+		Node* temp = head;
+		Node* temp1;
+		Node* newnode = new Node();
+		newnode->data=val;
+	
+		while(temp!=NULL && counter<position)
+		{
+			temp1 = temp;
+			temp = temp->next;
+			counter++;
+		}
+		temp1->next = newnode;
+		newnode->next=temp;
+	}
+	else if(position==1)
+	{
+		head = insertontop(head,val);
+	}
+	return head;
+}
 Node* insertinend(Node* head,int val)
 {
 	if(head!=NULL)
