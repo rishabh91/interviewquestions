@@ -5,6 +5,7 @@ struct Node
 	int data;
 	Node* next;
 };
+
 Node* insertontop(Node* head,int val)
 {
 	Node *temp = head;
@@ -54,6 +55,7 @@ Node* insertinend(Node* head,int val)
 		}
 		temp->next = newnode;
 	}
+
 	else
 	{
 		head = new Node();
@@ -63,6 +65,41 @@ Node* insertinend(Node* head,int val)
 	return head;
 
 }
+
+Node* deletefromtop(Node* head)
+{
+	Node* temp ;
+	temp = head->next;
+	delete head; //freeing the memory
+	head = temp;
+	return head;
+}
+
+Node* deletefromlist(Node* head,int position)
+{
+	if (position!=1)
+	{	int counter = 1;
+		Node* temp = head;
+		Node* del ;
+		while(temp!=NULL && counter<position)
+		{
+			del = temp;
+			temp = temp->next;
+			counter++;
+		}
+		
+			del->next = temp->next;
+			delete temp;
+			
+	}
+	else if(position==1)
+	{
+		head=deletefromtop(head);
+
+	}
+	return head;
+}
+
 void printlist(Node* head)
 {
 	Node* temp = head;
