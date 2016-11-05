@@ -76,6 +76,57 @@ void postorder(Node* root)
 
 	}
 }
+Node* minValueNode(Node* node)
+{
+     Node* current = node;
+ 
+    
+    while (current->left != NULL)
+        current = current->left;
+ 
+    return current;
+}
+/*
+Deleting involves three cases
+1) Deleting leaf nodes. (Simply delete the node)
+2) Node with single child node. (Delete the node & reattach the leaf node to deleted nodes parent)
+3) Node with two or more than two child. Find the inorder minimum valued node & swap its content with the node to be deleted
+then delete the node.
+*/
+Node *deletefromtree(Node* root,int value)
+{
+
+	if(root==NULL) return root;
+
+	else if (root->data>value)
+	{
+		root->left = deletefromtree(root->left,value);
+	}
+	else if (root->data<value)
+	{
+		root->right = deletefromtree(root->right,value);
+	}
+	else
+	{
+		if (root->left==NULL)
+		{
+			Node* temp = root->right;
+			delete(root);
+			return temp;
+		}
+		else if(root->right==NULL)
+		{
+			Node* temp = root->left;
+			delete(root);
+			return temp;
+		}
+		Node *temp = minValueNode(root->right);
+		root->data = temp->data;
+		root->right = deletefromtree(root->right,temp->data);
+
+	}
+	return root;
+}
 int main()
 {
 	Node* root = NULL;
@@ -99,6 +150,11 @@ int main()
 	preorder(root);
 	cout<<"The postorder traversal of the tree would look like "<<endl;
 	postorder(root);
+	cout<<"Enter the element you want to delete "<<endl;
+	cin>>value;
+	deletefromtree(root,value);
+	cout<<"modified tree is "<<endl;
+	inorder(root);
 
 	
 	
