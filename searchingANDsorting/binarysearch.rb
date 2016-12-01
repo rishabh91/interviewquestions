@@ -1,20 +1,29 @@
 def binary_search(a, target)
    lo = 0
-    hi = a.size-1
+    hi = a.size
    while lo <= hi
       mid = lo + (hi-lo)/2
       if a[mid] == target
          return mid            
       elsif a[mid] < target
-         lo = mid+1
+         lo = mid
       else
-         hi = mid-1
+         hi = mid
        end
     end
 end
 
-a = [1,3,5,6,8,9]
+# Driver for the program 
+   ab = [ ]
+20.times do 
+    ab <<(0..50).to_a[rand(50)] 
+end
+tar = ab[4]
+puts tar
+ab.sort!
+puts ab
 
-val = binary_search(a,1)
-puts val+1
+pos = binary_search(ab,tar)
+
+puts "The element was found at #{pos}"
             
